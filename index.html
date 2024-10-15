@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+<style> body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.quiz-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Quiz Application</h1>
+        <form id="quizForm">
+            <div class="question">
+                <h3>1. What is the capital of France?</h3>
+                <input type="radio" name="q1" value="Paris" required> Paris<br>
+                <input type="radio" name="q1" value="London"> London<br>
+                <input type="radio" name="q1" value="Rome"> Rome<br>
+            </div>
+            <div class="question">
+                <h3>2. Which planet is known as the Red Planet?</h3>
+                <input type="radio" name="q2" value="Mars" required> Mars<br>
+                <input type="radio" name="q2" value="Jupiter"> Jupiter<br>
+                <input type="radio" name="q2" value="Earth"> Earth<br>
+            </div>
+            <div class="question">
+                <h3>3. What is the square root of 64?</h3>
+                <input type="radio" name="q3" value="8" required> 8<br>
+                <input type="radio" name="q3" value="6"> 6<br>
+                <input type="radio" name="q3" value="10"> 10<br>
+            </div>
+            <div class="question">
+                <h3>4. Who wrote 'Hamlet'?</h3>
+                <input type="radio" name="q4" value="Shakespeare" required> Shakespeare<br>
+                <input type="radio" name="q4" value="Hemingway"> Hemingway<br>
+                <input type="radio" name="q4" value="Dickens"> Dickens<br>
+            </div>
+            <div class="question">
+                <h3>5. What is the boiling point of water?</h3>
+                <input type="radio" name="q5" value="100°C" required> 100°C<br>
+                <input type="radio" name="q5" value="90°C"> 90°C<br>
+                <input type="radio" name="q5" value="80°C"> 80°C<br>
+            </div>
+            <div class="question">
+                <h3>6. What is the largest mammal?</h3>
+                <input type="radio" name="q6" value="Blue Whale" required> Blue Whale<br>
+                <input type="radio" name="q6" value="Elephant"> Elephant<br>
+                <input type="radio" name="q6" value="Giraffe"> Giraffe<br>
+            </div>
+            <div class="question">
+                <h3>7. Who discovered penicillin?</h3>
+                <input type="radio" name="q7" value="Alexander Fleming" required> Alexander Fleming<br>
+                <input type="radio" name="q7" value="Isaac Newton"> Isaac Newton<br>
+                <input type="radio" name="q7" value="Marie Curie"> Marie Curie<br>
+            </div>
+            <div class="question">
+                <h3>8. How many continents are there?</h3>
+                <input type="radio" name="q8" value="7" required> 7<br>
+                <input type="radio" name="q8" value="5"> 5<br>
+                <input type="radio" name="q8" value="6"> 6<br>
+            </div>
+            <div class="question">
+                <h3>9. What is the atomic number of hydrogen?</h3>
+                <input type="radio" name="q9" value="1" required> 1<br>
+                <input type="radio" name="q9" value="2"> 2<br>
+                <input type="radio" name="q9" value="3"> 3<br>
+            </div>
+            <div class="question">
+                <h3>10. Which gas is most abundant in the Earth's atmosphere?</h3>
+                <input type="radio" name="q10" value="Nitrogen" required> Nitrogen<br>
+                <input type="radio" name="q10" value="Oxygen"> Oxygen<br>
+                <input type="radio" name="q10" value="Carbon Dioxide"> Carbon Dioxide<br>
+            </div>
+            <button type="button" id="submitQuiz">Submit Quiz</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+  <script> document.getElementById('submitQuiz').addEventListener('click', function() {
+    // Correct answers array
+    const correctAnswers = [
+        "Paris", "Mars", "8", "Shakespeare", "100°C", 
+        "Blue Whale", "Alexander Fleming", "7", "1", "Nitrogen"
+    ];
+    
+    // Initialize score
+    let score = 0;
+
+    // Get user answers
+    const userAnswers = [
+        document.querySelector('input[name="q1"]:checked')?.value,
+        document.querySelector('input[name="q2"]:checked')?.value,
+        document.querySelector('input[name="q3"]:checked')?.value,
+        document.querySelector('input[name="q4"]:checked')?.value,
+        document.querySelector('input[name="q5"]:checked')?.value,
+        document.querySelector('input[name="q6"]:checked')?.value,
+        document.querySelector('input[name="q7"]:checked')?.value,
+        document.querySelector('input[name="q8"]:checked')?.value,
+        document.querySelector('input[name="q9"]:checked')?.value,
+        document.querySelector('input[name="q10"]:checked')?.value
+    ];
+
+    // Compare answers and calculate score
+    for (let i = 0; i < correctAnswers.length; i++) {
+        if (userAnswers[i] === correctAnswers[i]) {
+            score++;
+        }
+    }
+
+    // Display result
+    const resultDiv = document.getElementById('result');
+    resultDiv.textContent = `Your score is: ${score}/10`;
+});
+</script>
+</body>
+</html>
